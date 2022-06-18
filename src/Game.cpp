@@ -9,8 +9,8 @@ Game::Game(){
 }
 
 void Game::limit_frame_rate(Uint32 &starting_t){
-  if(1000 / starting_t > SDL_GetTicks() - starting_t){
-    SDL_Delay(1000/starting_t - SDL_GetTicks() + starting_t);
+  if(1000 / FRAME_RATE > SDL_GetTicks() - starting_t){
+    SDL_Delay(1000/FRAME_RATE - SDL_GetTicks() + starting_t);
   }
 }
 
