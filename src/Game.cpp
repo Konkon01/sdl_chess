@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 Game::Game(){
+  SDL_Init(SDL_INIT_EVERYTHING);
   window = Window::get_window();
   is_running = true;
 }
