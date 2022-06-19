@@ -1,12 +1,15 @@
 #ifndef GAME_H
 #define GAME_H
 #include <SDL2/SDL.h>
+#include "../headers/Board.h"
 
 class Game {
 private:
   SDL_Window* window;
-
   bool is_running;
+  Board* board;
+
+  void clean_up();
 
 public:
   Game();
