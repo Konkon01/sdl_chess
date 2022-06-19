@@ -24,7 +24,7 @@ void Game::start_game(){
 
   while (is_running){
 
-    EventHandler event_handler;
+    EventHandler event_handler(board);
     SDL_Event event = event_handler.get_event();
 
     while (SDL_WaitEvent(&event)){
