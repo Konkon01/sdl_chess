@@ -6,6 +6,7 @@
 class Game {
 private:
   SDL_Window* window;
+  SDL_Surface* surf;
   Board* board;
 
   void clean_up();

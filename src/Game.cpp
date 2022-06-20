@@ -9,11 +9,13 @@
 Game::Game(){
   SDL_Init(SDL_INIT_EVERYTHING);
   window = Window::get_window();
+  surf = SDL_GetWindowSurface(window);
   board = new Board();
 }
 
 void Game::clean_up(){
   delete board;
+  SDL_FreeSurface(surf);
   Window::destroy_window();
   SDL_Quit();
 }
