@@ -4,11 +4,11 @@
 #include "../headers/Board.h"
 
 #include <SDL2/SDL.h>
+#include <iostream>
 
 Game::Game(){
   SDL_Init(SDL_INIT_EVERYTHING);
   window = Window::get_window();
-  is_running = true;
   board = new Board();
 }
 
@@ -22,18 +22,16 @@ void Game::start_game(){
 
   Uint32 starting_tick;
 
-  while (is_running){
 
-    EventHandler event_handler(board);
-    SDL_Event event = event_handler.get_event();
+  EventHandler event_handler(board);
+  SDL_Event event = event_handler.get_event();
 
-    while (SDL_WaitEvent(&event)){
-      if (event.type == SDL_QUIT){
-        is_running = false;
-      }
-      else{
-        event_handler.handle_events();
-      }
+  while (SDL_WaitEvent(&event)){
+    if (event.type == SDL_QUIT){
+      break;
+    }
+    else{
+      event_handler.handle_events();
     }
   }
 

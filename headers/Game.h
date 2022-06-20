@@ -6,7 +6,6 @@
 class Game {
 private:
   SDL_Window* window;
-  bool is_running;
   Board* board;
 
   void clean_up();
