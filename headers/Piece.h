@@ -7,8 +7,8 @@ private:
   static SDL_Texture* light;
   static SDL_Texture* dark;
 public:
-  static SDL_Texture* get_light();
-  static SDL_Texture* get_dark();
+  static SDL_Texture* get_light(SDL_Renderer* render);
+  static SDL_Texture* get_dark(SDL_Renderer* render);
 };
 
 class Horse{
@@ -16,8 +16,8 @@ class Horse{
   static SDL_Texture* light;
   static SDL_Texture* dark;
 public:
-  static SDL_Texture* get_light();
-  static SDL_Texture* get_dark();
+  static SDL_Texture* get_light(SDL_Renderer* render);
+  static SDL_Texture* get_dark(SDL_Renderer* render);
 };
 
 class Bishop{
@@ -25,8 +25,8 @@ class Bishop{
   static SDL_Texture* light;
   static SDL_Texture* dark;
 public:
-  static SDL_Texture* get_light();
-  static SDL_Texture* get_dark();
+  static SDL_Texture* get_light(SDL_Renderer* render);
+  static SDL_Texture* get_dark(SDL_Renderer* render);
 };
 
 class Queen{
@@ -34,8 +34,8 @@ class Queen{
   static SDL_Texture* light;
   static SDL_Texture* dark;
 public:
-  static SDL_Texture* get_light();
-  static SDL_Texture* get_dark();
+  static SDL_Texture* get_light(SDL_Renderer* render);
+  static SDL_Texture* get_dark(SDL_Renderer* render);
 };
 
 class King{
@@ -43,8 +43,8 @@ class King{
   static SDL_Texture* light;
   static SDL_Texture* dark;
 public:
-  static SDL_Texture* get_light();
-  static SDL_Texture* get_dark();
+  static SDL_Texture* get_light(SDL_Renderer* render);
+  static SDL_Texture* get_dark(SDL_Renderer* render);
 };
 
 class Pawn{
@@ -52,8 +52,8 @@ class Pawn{
   static SDL_Texture* light;
   static SDL_Texture* dark;
 public:
-  static SDL_Texture* get_light();
-  static SDL_Texture* get_dark();
+  static SDL_Texture* get_light(SDL_Renderer* render);
+  static SDL_Texture* get_dark(SDL_Renderer* render);
 };
 
 #endif
