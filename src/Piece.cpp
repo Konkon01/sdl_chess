@@ -32,7 +32,11 @@ SDL_Texture* Rook::get_dark(SDL_Renderer* render){
   }
 
   return dark;
-} 
+}
+void Rook::destroy(){
+  SDL_DestroyTexture(light);
+  SDL_DestroyTexture(dark);
+}
 
 //Horse-----------
 SDL_Texture* Horse::light = nullptr;
@@ -63,7 +67,11 @@ SDL_Texture* Horse::get_dark(SDL_Renderer* render){
   }
 
   return dark;
-} 
+}
+void Horse::destroy(){
+  SDL_DestroyTexture(light);
+  SDL_DestroyTexture(dark);
+}
 
 //Bishop-----------
 SDL_Texture* Bishop::light = nullptr;
@@ -95,7 +103,10 @@ SDL_Texture* Bishop::get_dark(SDL_Renderer* render){
 
   return dark;
 } 
-
+void Bishop::destroy(){
+  SDL_DestroyTexture(light);
+  SDL_DestroyTexture(dark);
+}
 
 
 //QUEEN-------------
@@ -127,7 +138,11 @@ SDL_Texture* Queen::get_dark(SDL_Renderer* render){
   }
 
   return dark;
-} 
+}
+void Queen::destroy(){
+  SDL_DestroyTexture(light);
+  SDL_DestroyTexture(dark);
+}
 
 
 //KING-------------
@@ -159,7 +174,11 @@ SDL_Texture* King::get_dark(SDL_Renderer* render){
   }
 
   return dark;
-} 
+}
+void King::destroy(){
+  SDL_DestroyTexture(light);
+  SDL_DestroyTexture(dark);
+}
 
 //PAWN-------------
 SDL_Texture* Pawn::light = nullptr;
@@ -190,4 +209,8 @@ SDL_Texture* Pawn::get_dark(SDL_Renderer* render){
   }
 
   return dark;
-} 
+}
+void Pawn::destroy(){
+  SDL_DestroyTexture(light);
+  SDL_DestroyTexture(dark);
+}
