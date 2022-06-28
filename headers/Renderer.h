@@ -12,7 +12,7 @@ public:
   Renderer(SDL_Window* &w, Board* b);
   ~Renderer();
 
-  void render_board(std::vector<int>possible_move_index);
+  void render_board(std::vector<int> &possible_moves);
 };
 
 #endif

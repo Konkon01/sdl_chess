@@ -11,7 +11,7 @@ Renderer::~Renderer(){
   SDL_DestroyRenderer(rend);
 }
 
-void Renderer::render_board(std::vector<int>possible_move_index){
+void Renderer::render_board(std::vector<int> &possible_moves){
   SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
   SDL_RenderClear(rend);
   for(int i = 0; i < 8; i++){
