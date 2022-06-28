@@ -2,6 +2,7 @@
 #define EVENTHANDLER_H
 #include "Board.h"
 #include <SDL2/SDL.h>
+#include <vector>
 
 class EventHandler {
 private:
@@ -10,7 +11,7 @@ private:
 public:
   EventHandler(Board* b);
   SDL_Event& get_event();
-  void handle_events();
+  void handle_events(std::vector<int> &possible_moves);
 };
 
 #endif
