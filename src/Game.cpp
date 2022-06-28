@@ -2,21 +2,34 @@
 #include "../headers/Window.h"
 #include "../headers/EventHandler.h"
 #include "../headers/Board.h"
+#include "../headers/Renderer.h"
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <vector>
+
+
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 720
 
 Game::Game(){
   SDL_Init(SDL_INIT_EVERYTHING);
-  window = Window::get_window();
-  surf = SDL_GetWindowSurface(window);
+  window = SDL_CreateWindow("Chess Game",
+                          SDL_WINDOWPOS_CENTERED,
+                          SDL_WINDOWPOS_CENTERED,
+                          SCREEN_WIDTH,
+                          SCREEN_HEIGHT,
+                          SDL_WINDOW_SHOWN);
   board = new Board();
+  event_handler = new EventHandler(board);
+  renderer = new Renderer(window, board);
 }
 
 void Game::clean_up(){
   delete board;
-  SDL_FreeSurface(surf);
-  Window::destroy_window();
+  delete event_handler;
+  delete renderer;
+  SDL_DestroyWindow(window);
   SDL_Quit();
 }
 
@@ -24,17 +37,18 @@ void Game::start_game(){
 
   Uint32 starting_tick;
 
-
-  EventHandler event_handler(board);
-  SDL_Event event = event_handler.get_event();
+  SDL_Event event = event_handler->get_event();
 
   while (SDL_WaitEvent(&event)){
+    std::vector<int> possible_moves;
     if (event.type == SDL_QUIT){
       break;
+    
+    }else{
+      event_handler->handle_events(possible_moves);
+
     }
-    else{
-      event_handler.handle_events();
-    }
+    renderer->render_board(possible_moves);
   }
 
   clean_up();
