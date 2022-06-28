@@ -6,11 +6,13 @@
 #include <vector>
 
 class Renderer {
-  SDL_Renderer* renderer;
+  SDL_Renderer* rend;
   Board* board;
 public:
-  Renderer(SDL_Window* w, Board* b);
+  Renderer(SDL_Window* &w, Board* b);
+  ~Renderer();
 
+  void render_board(std::vector<int>possible_move_index);
 };
 
 #endif
