@@ -3,6 +3,8 @@
 #include <utility>
 
 class Board {
+  friend class Renderer;
+
   char board[64];
 public:
   Board();
