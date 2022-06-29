@@ -44,19 +44,17 @@ std::pair<int, int> Board::get_coord_from_ind(int i){
   std::pair<int, int> coord;
   
   //Upper left corner of the rectangle
-  coord.first = i % 8;
-  coord.second = i / 8;
+  coord.first = (i % 8) * 80;
+  coord.second = (i / 8) * 80;
   
   return coord;
 }
 
 int Board::get_ind_from_coord(std::pair<int, int> coord){
-  int i;
   
   // 1/8 of the screen width 80px
   int x = coord.first / 80;
   int y = coord.second / 80;
 
-  i = y * 7 + x;
-  return i;
+  return y * 7 + x;
 }
