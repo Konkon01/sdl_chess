@@ -37,3 +37,23 @@ void Renderer::render_board(std::vector<int> &possible_moves){
   }
   SDL_RenderPresent(rend);
 }
+
+void Renderer::render_pieces(){
+  for(int i = 0; i < 8; i++){
+    for(int j = 0; j < 8; j++){
+      char piece_char = board->board[i * 8 + j];
+      
+      if(piece_char == 'x')
+        continue;
+      
+      SDL_Texture* piece_texture = get_piece_texture(piece_char);
+      SDL_Rect dest_rect = {
+        i * 80,
+        j * 80,
+        80,
+        80
+      };
+      SDL_RenderCopy(rend, piece_texture, NULL, &dest_rect);
+    }
+  }
+}
