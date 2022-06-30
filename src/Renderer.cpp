@@ -1,14 +1,23 @@
 #include "../headers/Renderer.h"
 #include "../headers/Piece.h"
 #include "../headers/ErrorLoger.hpp"
-#include "../headers/Window.h"
+#include "../headers/Field.h"
 
 Renderer::Renderer(SDL_Window* &w, Board* b){
   rend = SDL_CreateRenderer(w, -1, 0);
   board = b;
+  pieces.push_back(new Pawn(rend));
+  pieces.push_back(new Rook(rend));
+  pieces.push_back(new Horse(rend));
+  pieces.push_back(new Bishop(rend));
+  pieces.push_back(new Queen(rend));
+  pieces.push_back(new King(rend));
 }
 Renderer::~Renderer(){
   SDL_DestroyRenderer(rend);
+  for(unsigned int i = 0; i < pieces.size(); i++){
+    delete pieces.at(i);
+  }
 }
 
 void Renderer::render_board(std::vector<int> &possible_moves){
@@ -27,33 +36,44 @@ void Renderer::render_board(std::vector<int> &possible_moves){
       
       }
       SDL_Rect rect = {
-        i * 80,
-        j * 80,
-        80,
-        80
+        j * FIELD_WIDTH,
+        i * FIELD_HEIGHT,
+        FIELD_WIDTH,
+        FIELD_HEIGHT
       };
       SDL_RenderFillRect(rend, &rect);
+
+      
+      char piece_char = board->board[i * 8 + j];
+      if(piece_char != 'x'){
+        int piece_index = get_piece_index(piece_char);
+        SDL_Texture* piece_texture = //(ASCII: A-Z 65-90) piece_char < 91 => piece_char is capital letter
+                  (piece_char < 91)? pieces.at(piece_index)->get_light() : pieces.at(piece_index)->get_dark();
+        
+        SDL_RenderCopy(rend, piece_texture, NULL, &rect);
+      }
+      
     }
   }
   SDL_RenderPresent(rend);
 }
 
-void Renderer::render_pieces(){
-  for(int i = 0; i < 8; i++){
-    for(int j = 0; j < 8; j++){
-      char piece_char = board->board[i * 8 + j];
-      
-      if(piece_char == 'x')
-        continue;
-      
-      SDL_Texture* piece_texture = get_piece_texture(piece_char);
-      SDL_Rect dest_rect = {
-        i * 80,
-        j * 80,
-        80,
-        80
-      };
-      SDL_RenderCopy(rend, piece_texture, NULL, &dest_rect);
-    }
+int Renderer::get_piece_index(char piece_char){
+  int res;
+   if(piece_char == 'x'){
+    res = -1;
+   }else if(piece_char == 'P' || piece_char == 'p'){
+    res = 0;
+  } else if (piece_char == 'R' || piece_char == 'r'){
+    res = 1;
+  } else if (piece_char == 'H' || piece_char == 'h'){
+    res = 2;
+  } else if (piece_char == 'B' || piece_char == 'b'){
+    res = 3;
+  } else if (piece_char == 'Q' || piece_char == 'q'){
+    res = 4;
+  } else if (piece_char == 'K' || piece_char == 'k'){
+    res = 5;
   }
+  return res;
 }
