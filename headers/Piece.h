@@ -2,64 +2,53 @@
 #define PIECE_H
 #include <SDL2/SDL.h>
 
-class Rook{
-private:
-  static SDL_Texture* light;
-  static SDL_Texture* dark;
+class Piece {
+protected:
+  SDL_Texture* light;
+  SDL_Texture* dark;
+  Piece(const char* light_path, const char* dark_path, SDL_Renderer* &renderer);
+
 public:
-  static SDL_Texture* get_light(SDL_Renderer* render);
-  static SDL_Texture* get_dark(SDL_Renderer* render);
-  static void destroy();
+  virtual ~Piece();
+
+  SDL_Texture* &get_light();
+  SDL_Texture* &get_dark();
 };
 
-class Horse{
-  private:
-  static SDL_Texture* light;
-  static SDL_Texture* dark;
+class Rook : public Piece{
 public:
-  static SDL_Texture* get_light(SDL_Renderer* render);
-  static SDL_Texture* get_dark(SDL_Renderer* render);
-  static void destroy();
+  Rook(SDL_Renderer* &renderer)
+    : Piece("./media/light/l_rook.bmp","./media/dark/d_rook.bmp",renderer){}
 };
 
-class Bishop{
-  private:
-  static SDL_Texture* light;
-  static SDL_Texture* dark;
+class Horse : public Piece{
 public:
-  static SDL_Texture* get_light(SDL_Renderer* render);
-  static SDL_Texture* get_dark(SDL_Renderer* render);
-  static void destroy();
+  Horse(SDL_Renderer* &renderer)
+    : Piece("./media/light/l_horse.bmp","./media/dark/d_horse.bmp",renderer){}
 };
 
-class Queen{
-  private:
-  static SDL_Texture* light;
-  static SDL_Texture* dark;
+class Bishop : public Piece{
 public:
-  static SDL_Texture* get_light(SDL_Renderer* render);
-  static SDL_Texture* get_dark(SDL_Renderer* render);
-  static void destroy();
+  Bishop(SDL_Renderer* &renderer)
+    : Piece("./media/light/l_bishop.bmp","./media/dark/d_bishop.bmp",renderer){}
 };
 
-class King{
-  private:
-  static SDL_Texture* light;
-  static SDL_Texture* dark;
+class Queen : public Piece{
 public:
-  static SDL_Texture* get_light(SDL_Renderer* render);
-  static SDL_Texture* get_dark(SDL_Renderer* render);
-  static void destroy();
+  Queen(SDL_Renderer* &renderer)
+    : Piece("./media/light/l_queen.bmp","./media/dark/d_queen.bmp",renderer){}
 };
 
-class Pawn{
-  private:
-  static SDL_Texture* light;
-  static SDL_Texture* dark;
+class King : public Piece{
 public:
-  static SDL_Texture* get_light(SDL_Renderer* render);
-  static SDL_Texture* get_dark(SDL_Renderer* render);
-  static void destroy();
+  King(SDL_Renderer* &renderer)
+    : Piece("./media/light/l_king.bmp","./media/dark/d_king.bmp",renderer){}
+};
+
+class Pawn : public Piece{
+public:
+  Pawn(SDL_Renderer* &renderer)
+    : Piece("./media/light/l_pawn.bmp","./media/dark/d_pawn.bmp",renderer){}
 };
 
 #endif

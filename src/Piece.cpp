@@ -3,214 +3,38 @@
 
 #include <iostream>
 
-//ROOK---------------
-SDL_Texture* Rook::light = nullptr;
-SDL_Texture* Rook::dark = nullptr;
-
-SDL_Texture* Rook::get_light(SDL_Renderer* render){
+Piece::Piece(const char* light_path, const char* dark_path, SDL_Renderer* &renderer){
+  //LIGHT
+  SDL_Surface* light_surf = SDL_LoadBMP(light_path);
+  if(light_surf == nullptr){
+    ErrorLoger::LogError(std::cout, "Piece Surface creating");
+  }
+  light = SDL_CreateTextureFromSurface(renderer, light_surf);
   if(light == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/light/rook.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Rook image loading");
-      return nullptr;
-    }
-    SDL_Texture* light = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
+    ErrorLoger::LogError(std::cout, "Piece Texture creating");
   }
+  SDL_FreeSurface(light_surf);
 
-  return light;
-}
-SDL_Texture* Rook::get_dark(SDL_Renderer* render){
+  //DARK
+  SDL_Surface* dark_surf = SDL_LoadBMP(dark_path);
+  if(dark_surf == nullptr){
+    ErrorLoger::LogError(std::cout, "Piece Surface creating");
+  }
+  dark = SDL_CreateTextureFromSurface(renderer, dark_surf);
   if(dark == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/dark/rook.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Rook image loading");
-      return nullptr;
-    }
-    SDL_Texture* dark = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
+    ErrorLoger::LogError(std::cout, "Piece Texture creating");
+  }
+  SDL_FreeSurface(dark_surf);
+}
+
+  SDL_Texture* &Piece::get_light(){
+    return light;
+  }
+  SDL_Texture* &Piece::get_dark(){
+    return dark;
   }
 
-  return dark;
-}
-void Rook::destroy(){
-  SDL_DestroyTexture(light);
-  SDL_DestroyTexture(dark);
-}
-
-//Horse-----------
-SDL_Texture* Horse::light = nullptr;
-SDL_Texture* Horse::dark = nullptr;
-
-SDL_Texture* Horse::get_light(SDL_Renderer* render){
-  if(light == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/light/horse.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Horse image loading");
-      return nullptr;
-    }
-    SDL_Texture* light = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return light;
-}
-SDL_Texture* Horse::get_dark(SDL_Renderer* render){
-  if(dark == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/dark/horse.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Horse image loading");
-      return nullptr;
-    }
-    SDL_Texture* dark = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return dark;
-}
-void Horse::destroy(){
-  SDL_DestroyTexture(light);
-  SDL_DestroyTexture(dark);
-}
-
-//Bishop-----------
-SDL_Texture* Bishop::light = nullptr;
-SDL_Texture* Bishop::dark = nullptr;
-
-SDL_Texture* Bishop::get_light(SDL_Renderer* render){
-  if(light == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/light/rook.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Bishop image loading");
-      return nullptr;
-    }
-    SDL_Texture* light = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return light;
-}
-SDL_Texture* Bishop::get_dark(SDL_Renderer* render){
-  if(dark == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/dark/rook.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Bishop image loading");
-      return nullptr;
-    }
-    SDL_Texture* dark = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return dark;
-} 
-void Bishop::destroy(){
-  SDL_DestroyTexture(light);
-  SDL_DestroyTexture(dark);
-}
-
-
-//QUEEN-------------
-SDL_Texture* Queen::light = nullptr;
-SDL_Texture* Queen::dark = nullptr;
-
-SDL_Texture* Queen::get_light(SDL_Renderer* render){
-  if(light == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/light/queen.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Queen image loading");
-      return nullptr;
-    }
-    SDL_Texture* light = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return light;
-}
-SDL_Texture* Queen::get_dark(SDL_Renderer* render){
-  if(dark == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/dark/queen.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Queen image loading");
-      return nullptr;
-    }
-    SDL_Texture* dark = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return dark;
-}
-void Queen::destroy(){
-  SDL_DestroyTexture(light);
-  SDL_DestroyTexture(dark);
-}
-
-
-//KING-------------
-SDL_Texture* King::light = nullptr;
-SDL_Texture* King::dark = nullptr;
-
-SDL_Texture* King::get_light(SDL_Renderer* render){
-  if(light == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/light/king.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "King image loading");
-      return nullptr;
-    }
-    SDL_Texture* light = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return light;
-}
-SDL_Texture* King::get_dark(SDL_Renderer* render){
-  if(dark == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/dark/king.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "King image loading");
-      return nullptr;
-    }
-    SDL_Texture* dark = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return dark;
-}
-void King::destroy(){
-  SDL_DestroyTexture(light);
-  SDL_DestroyTexture(dark);
-}
-
-//PAWN-------------
-SDL_Texture* Pawn::light = nullptr;
-SDL_Texture* Pawn::dark = nullptr;
-
-SDL_Texture* Pawn::get_light(SDL_Renderer* render){
-  if(light == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/light/pawn.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Pawn image loading");
-      return nullptr;
-    }
-    SDL_Texture* light = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return light;
-}
-SDL_Texture* Pawn::get_dark(SDL_Renderer* render){
-  if(dark == nullptr){
-    SDL_Surface* temp = SDL_LoadBMP("../media/dark/pawn.bmp");
-    if(temp == nullptr){
-      ErrorLoger::LogError(std::cout, "Pawn image loading");
-      return nullptr;
-    }
-    SDL_Texture* dark = SDL_CreateTextureFromSurface(render, temp);
-    SDL_FreeSurface(temp);
-  }
-
-  return dark;
-}
-void Pawn::destroy(){
+Piece::~Piece(){
   SDL_DestroyTexture(light);
   SDL_DestroyTexture(dark);
 }
