@@ -1,7 +1,7 @@
 #ifndef FIELD_H
 #define FIELD_H
 
-#define FIELD_WIDTH 480
-#define FIELD_HEIGHT 540
+#define FIELD_WIDTH 60
+#define FIELD_HEIGHT 60
 
 #endif
