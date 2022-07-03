@@ -11,6 +11,7 @@ public:
   
   std::pair<int, int> get_coord_from_ind(int i);
   int get_ind_from_coord(std::pair<int, int> coord);
+  char get_piece_at(int ind);
 };
 
 #endif

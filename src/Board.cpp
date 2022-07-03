@@ -59,3 +59,7 @@ int Board::get_ind_from_coord(std::pair<int, int> coord){
 
   return y * 7 + x;
 }
+
+char Board::get_piece_at(int ind){
+  return board[ind];
+}
