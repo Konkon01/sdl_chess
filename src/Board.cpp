@@ -53,11 +53,10 @@ std::pair<int, int> Board::get_coord_from_ind(int i){
 
 int Board::get_ind_from_coord(std::pair<int, int> coord){
   
-  // 1/8 of the screen width 80px
   int x = coord.first / FIELD_WIDTH;
   int y = coord.second / FIELD_HEIGHT;
 
-  return y * 7 + x;
+  return y * 8 + x;
 }
 
 char Board::get_piece_at(int ind){
