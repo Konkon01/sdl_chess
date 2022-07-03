@@ -63,3 +63,8 @@ int Board::get_ind_from_coord(std::pair<int, int> coord){
 char Board::get_piece_at(int ind){
   return board[ind];
 }
+
+void Board::move_piece(int from, int to){
+  board[to] = board[from];
+  board[from] = 'x';
+}
