@@ -47,7 +47,7 @@ void Renderer::render_board(std::vector<int> &possible_moves){
       char piece_char = board->board[i * 8 + j];
       if(piece_char != 'x'){
         int piece_index = get_piece_index(piece_char);
-        SDL_Texture* piece_texture = //(ASCII: A-Z 65-90) piece_char < 91 => piece_char is capital letter
+        SDL_Texture* piece_texture = //(ASCII: A-Z 65-90) piece_char < 91 => piece_char is capital letter => piece is light
                   (piece_char < 91)? pieces.at(piece_index)->get_light() : pieces.at(piece_index)->get_dark();
         
         SDL_RenderCopy(rend, piece_texture, NULL, &rect);
