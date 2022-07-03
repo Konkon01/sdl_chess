@@ -33,20 +33,12 @@ void Game::start_game(){
 
   Uint32 starting_tick;
 
-  SDL_Event event = event_handler->get_event();
-
   std::vector<int> possible_moves;
   renderer->render_board(possible_moves);
 
-  while (SDL_WaitEvent(&event)){
-    if (event.type == SDL_QUIT){
-      break;
-    
-    }else{
-      event_handler->handle_events(possible_moves);
-
-    }
+  bool running = true;
+  while(running){
+    event_handler->handle_events(possible_moves, running);
   }
-
   clean_up();
 }
