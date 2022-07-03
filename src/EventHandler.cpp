@@ -31,6 +31,10 @@ bool EventHandler::is_possible(std::vector<int> &possible_moves, int field_ind){
   return false;
 }
 
+void EventHandler::change_turn(){
+  is_light_turn = !is_light_turn;
+}
+
 void EventHandler::handle_events(std::vector<int> &possible_moves, bool &running){
   
   while(SDL_WaitEvent(&event)){
@@ -61,6 +65,7 @@ void EventHandler::handle_events(std::vector<int> &possible_moves, bool &running
 
         if(is_possible(possible_moves, field_ind)){ //Valid move
           board->move_piece(selected_ind, field_ind);
+          change_turn();
         }
         
         reset(selected_ind, selected_piece, possible_moves);
@@ -71,6 +76,12 @@ void EventHandler::handle_events(std::vector<int> &possible_moves, bool &running
           -select piece
           -calculate possible moves
         */
+        if(is_light_turn && field_piece > 90){
+          continue; //Light player chose on dark piece
+          
+        } else if(!is_light_turn && field_piece < 91){
+          continue; // Dark player chose on light piece
+        }
         selected_ind = field_ind;
         selected_piece = field_piece;
       }

@@ -14,6 +14,7 @@ private:
 
   void reset(int &s_ind, char &s_piece, std::vector<int> &possible_moves);
   bool is_possible(std::vector<int> &possible_moves, int field_ind);
+  void change_turn();
 public:
   EventHandler(Board* b);
   SDL_Event& get_event();
