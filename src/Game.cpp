@@ -39,6 +39,7 @@ void Game::start_game(){
   bool running = true;
   while(running){
     event_handler->handle_events(possible_moves, running);
+    renderer->render_board(possible_moves);
   }
   clean_up();
 }
