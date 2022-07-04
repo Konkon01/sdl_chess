@@ -4,6 +4,7 @@
 
 class Board {
   friend class Renderer;
+  friend class MoveCalculator;
 
   char board[64];
 public:
