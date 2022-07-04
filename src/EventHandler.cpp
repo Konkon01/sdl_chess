@@ -76,6 +76,9 @@ void EventHandler::handle_events(std::vector<int> &possible_moves, bool &running
           -select piece
           -calculate possible moves
         */
+        if(field_piece == 'x'){
+          continue; //Empty field
+        }
         if(is_light_turn && field_piece > 90){
           continue; //Light player chose on dark piece
           
