@@ -67,3 +67,10 @@ void Board::move_piece(int from, int to){
   board[to] = board[from];
   board[from] = 'x';
 }
+
+std::pair<int, int> Board::get_2D_ind_from_ind(int i){
+  std::pair<int, int> res;
+  res.first = i % 8;
+  res.second = i / 8;
+  return res;
+}
