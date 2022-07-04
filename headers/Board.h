@@ -14,6 +14,7 @@ public:
   int get_ind_from_coord(std::pair<int, int> coord);
   char get_piece_at(int ind);
   void move_piece(int from, int to);
+  std::pair<int, int> get_2D_ind_from_ind(int i);
 };
 
 #endif
