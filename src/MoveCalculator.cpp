@@ -1,4 +1,5 @@
 #include "../headers/MoveCalculator.h"
+#include <iostream>
 
 MoveCalculator::MoveCalculator(Board *b){
   board = b;
@@ -28,7 +29,9 @@ void MoveCalculator::calculate_moves(int f_ind, char f_piece, std::vector<int> &
 void MoveCalculator::calculate_pawn(int f_ind, char f_piece, std::vector<int> &p_moves){
   std::pair<int, int> coords = board->get_2D_ind_from_ind(f_ind);
   if(f_piece == 'P'){ // LIGHT
-    p_moves.push_back(f_ind - 8);
+    if(board->board[f_ind-8] == 'x'){
+      p_moves.push_back(f_ind - 8);
+    }
     
     if(coords.second == 6){ //First move of pawn
       p_moves.push_back(f_ind - 16);
@@ -36,16 +39,18 @@ void MoveCalculator::calculate_pawn(int f_ind, char f_piece, std::vector<int> &p
 
     char l_piece = board->board[f_ind - 9];
     char r_piece = board->board[f_ind - 7];
-    
-    if(!is_same_team(f_piece, l_piece)){
-      p_moves.push_back(l_piece);
+
+    if(l_piece != 'x' && !is_same_team(f_piece, l_piece)){
+      p_moves.push_back(f_ind - 9);
     }
-    if(!is_same_team(f_piece, r_piece)){
-      p_moves.push_back(r_piece);
+    if(r_piece != 'x' && !is_same_team(f_piece, r_piece)){
+      p_moves.push_back(f_ind - 7);
     }
 
   } else {
-    p_moves.push_back(f_ind + 8);
+    if(board->board[f_ind + 8] == 'x'){
+      p_moves.push_back(f_ind + 8);
+    }
     
     if(coords.second == 1){ //First move of pawn
       p_moves.push_back(f_ind + 16);
@@ -54,11 +59,11 @@ void MoveCalculator::calculate_pawn(int f_ind, char f_piece, std::vector<int> &p
     char l_piece = board->board[f_ind + 7];
     char r_piece = board->board[f_ind + 9];
     
-    if(!is_same_team(f_piece, l_piece)){
-      p_moves.push_back(l_piece);
+    if(l_piece != 'x' && !is_same_team(f_piece, l_piece)){
+      p_moves.push_back(f_ind + 7);
     }
-    if(!is_same_team(f_piece, r_piece)){
-      p_moves.push_back(r_piece);
+    if(r_piece != 'x' && !is_same_team(f_piece, r_piece)){
+      p_moves.push_back(f_ind + 9);
     }
   }
 
@@ -70,7 +75,7 @@ void MoveCalculator::calculate_queen(int f_ind, char f_piece, std::vector<int> &
 void MoveCalculator::calculate_king(int f_ind, char f_piece, std::vector<int> &p_moves){}
   
 bool MoveCalculator::is_same_team(char p1, char p2){
-  return (p1 < 91 && p2 < 91) || (p1 > 91 || p2 > 91);
+  return (p1 < 91 && p2 < 91) || (p1 > 91 && p2 > 91);
 }
 
 void MoveCalculator::left_to_right(int f_ind, char f_piece, std::vector<int> &p_moves){
