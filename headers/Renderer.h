@@ -12,6 +12,7 @@ class Renderer {
   std::vector<Piece*> pieces;
 
   int get_piece_index(char piece_char);
+  bool is_possible_move(int p_ind, std::vector<int> &possible_moves);
 public:
   Renderer(SDL_Window* &w, Board* b);
   ~Renderer();

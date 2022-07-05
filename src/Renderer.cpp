@@ -77,3 +77,11 @@ int Renderer::get_piece_index(char piece_char){
   }
   return res;
 }
+
+  bool Renderer::is_possible_move(int p_ind, std::vector<int> &possible_moves){
+    for(int ind : possible_moves){
+      if(p_ind == ind)
+        return true;
+    }
+    return false;
+  }
