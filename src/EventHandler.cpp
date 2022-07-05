@@ -88,6 +88,8 @@ void EventHandler::handle_events(std::vector<int> &possible_moves, bool &running
         }
         selected_ind = field_ind;
         selected_piece = field_piece;
+        move_calc->calculate_moves(selected_ind, selected_piece, possible_moves);
+        break;
       }
       
     }
