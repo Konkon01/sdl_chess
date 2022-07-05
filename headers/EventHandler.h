@@ -1,6 +1,7 @@
 #ifndef EVENTHANDLER_H
 #define EVENTHANDLER_H
 #include "Board.h"
+#include "MoveCalculator.h"
 #include <SDL2/SDL.h>
 #include <vector>
 
@@ -8,6 +9,7 @@ class EventHandler {
 private:
   SDL_Event event;
   Board* board;
+  MoveCalculator* move_calc;
   bool is_light_turn;
   char selected_piece;
   int selected_ind;
@@ -17,7 +19,7 @@ private:
   void change_turn();
 public:
   EventHandler(Board* b);
-  SDL_Event& get_event();
+  ~EventHandler();
   void handle_events(std::vector<int> &possible_moves, bool &running);
 };
 

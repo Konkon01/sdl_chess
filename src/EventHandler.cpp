@@ -1,5 +1,6 @@
 #include "../headers/EventHandler.h"
 #include "../headers/Board.h"
+#include "../headers/MoveCalculator.h"
 
 #include <SDL2/SDL.h>
 #include <utility>
@@ -7,18 +8,18 @@
 
 EventHandler::EventHandler(Board* b){
   board = b;
+  move_calc = new MoveCalculator(b);
   is_light_turn = true;
   selected_piece = 'x';
   selected_ind = -1;
 }
-
-SDL_Event& EventHandler::get_event(){
-  return event;
+EventHandler::~EventHandler(){
+  delete move_calc;
 }
 
 void EventHandler::reset(int &s_ind, char &s_piece, std::vector<int> &possible_moves){
   s_ind = -1;
-  s_piece = -1;
+  s_piece = 'x';
   possible_moves.clear();
 }
 
