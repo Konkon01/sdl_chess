@@ -25,7 +25,44 @@ void MoveCalculator::calculate_moves(int f_ind, char f_piece, std::vector<int> &
   }
 }
 
-void MoveCalculator::calculate_pawn(int f_ind, char f_piece, std::vector<int> &p_moves){}
+void MoveCalculator::calculate_pawn(int f_ind, char f_piece, std::vector<int> &p_moves){
+  std::pair<int, int> coords = board->get_2D_ind_from_ind(f_ind);
+  if(f_piece == 'P'){ // LIGHT
+    p_moves.push_back(f_ind - 8);
+    
+    if(coords.second == 6){ //First move of pawn
+      p_moves.push_back(f_ind - 16);
+    }
+
+    char l_piece = board->board[f_ind - 9];
+    char r_piece = board->board[f_ind - 7];
+    
+    if(!is_same_team(f_piece, l_piece)){
+      p_moves.push_back(l_piece);
+    }
+    if(!is_same_team(f_piece, r_piece)){
+      p_moves.push_back(r_piece);
+    }
+
+  } else {
+    p_moves.push_back(f_ind + 8);
+    
+    if(coords.second == 1){ //First move of pawn
+      p_moves.push_back(f_ind + 16);
+    }
+
+    char l_piece = board->board[f_ind + 7];
+    char r_piece = board->board[f_ind + 9];
+    
+    if(!is_same_team(f_piece, l_piece)){
+      p_moves.push_back(l_piece);
+    }
+    if(!is_same_team(f_piece, r_piece)){
+      p_moves.push_back(r_piece);
+    }
+  }
+
+}
 void MoveCalculator::calculate_rook(int f_ind, char f_piece, std::vector<int> &p_moves){}
 void MoveCalculator::calculate_horse(int f_ind, char f_piece, std::vector<int> &p_moves){}
 void MoveCalculator::calculate_bishop(int f_ind, char f_piece, std::vector<int> &p_moves){}
