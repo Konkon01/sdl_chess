@@ -25,15 +25,27 @@ void Renderer::render_board(std::vector<int> &possible_moves){
   SDL_RenderClear(rend);
   for(int i = 0; i < 8; i++){
     for(int j = 0; j < 8; j++){
-      
-      if(i % 2 == 0){
-        (j % 2 == 0)? SDL_SetRenderDrawColor(rend, 238, 238, 213, 255) : 
-                      SDL_SetRenderDrawColor(rend, 125, 148, 93, 255);
+
+      if(is_possible_move(i * 8 + j, possible_moves)){
+        if(i % 2 == 0){
+          (j % 2 == 0)? SDL_SetRenderDrawColor(rend, 77, 191, 217, 255) : 
+                        SDL_SetRenderDrawColor(rend, 30, 129, 176, 255);
+          
+        } else {
+          (j % 2 == 0)? SDL_SetRenderDrawColor(rend, 30, 129, 176, 255) : 
+                        SDL_SetRenderDrawColor(rend, 77, 191, 217, 255);
         
+        }        
       } else {
-        (j % 2 == 0)? SDL_SetRenderDrawColor(rend, 125, 148, 93, 255) : 
-                      SDL_SetRenderDrawColor(rend, 238, 238, 213, 255);
-      
+        if(i % 2 == 0){
+          (j % 2 == 0)? SDL_SetRenderDrawColor(rend, 238, 238, 213, 255) : 
+                        SDL_SetRenderDrawColor(rend, 125, 148, 93, 255);
+          
+        } else {
+          (j % 2 == 0)? SDL_SetRenderDrawColor(rend, 125, 148, 93, 255) : 
+                        SDL_SetRenderDrawColor(rend, 238, 238, 213, 255);
+        
+        }
       }
       SDL_Rect rect = {
         j * FIELD_WIDTH,
@@ -78,10 +90,10 @@ int Renderer::get_piece_index(char piece_char){
   return res;
 }
 
-  bool Renderer::is_possible_move(int p_ind, std::vector<int> &possible_moves){
-    for(int ind : possible_moves){
-      if(p_ind == ind)
-        return true;
-    }
-    return false;
+bool Renderer::is_possible_move(int p_ind, std::vector<int> &possible_moves){
+  for(int ind : possible_moves){
+    if(p_ind == ind)
+      return true;
   }
+  return false;
+}
