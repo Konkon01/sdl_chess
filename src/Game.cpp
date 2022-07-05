@@ -31,8 +31,6 @@ void Game::clean_up(){
 
 void Game::start_game(){
 
-  Uint32 starting_tick;
-
   std::vector<int> possible_moves;
   renderer->render_board(possible_moves);
 
