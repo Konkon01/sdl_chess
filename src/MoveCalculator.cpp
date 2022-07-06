@@ -73,7 +73,10 @@ void MoveCalculator::calculate_rook(int f_ind, char f_piece, std::vector<int> &p
   up_to_down(f_ind, f_piece, p_moves);
 }
 void MoveCalculator::calculate_horse(int f_ind, char f_piece, std::vector<int> &p_moves){}
-void MoveCalculator::calculate_bishop(int f_ind, char f_piece, std::vector<int> &p_moves){}
+void MoveCalculator::calculate_bishop(int f_ind, char f_piece, std::vector<int> &p_moves){
+  upper_left_to_lower_right(f_ind, f_piece, p_moves);
+  lower_left_to_upper_right(f_ind, f_piece, p_moves);
+}
 void MoveCalculator::calculate_queen(int f_ind, char f_piece, std::vector<int> &p_moves){}
 void MoveCalculator::calculate_king(int f_ind, char f_piece, std::vector<int> &p_moves){}
   
@@ -107,9 +110,8 @@ void MoveCalculator::left_to_right(int f_ind, char f_piece, std::vector<int> &p_
 void MoveCalculator::upper_left_to_lower_right(int f_ind, char f_piece, std::vector<int> &p_moves){
   //BISHOP and QUEEN
   std::pair<int, int> coords = board->get_2D_ind_from_ind(f_ind);
-  int tempX = coords.first;
-  int tempY = coords.second;
-
+  int tempX = coords.first - 1;
+  int tempY = coords.second - 1;
   while(tempX >= 0 && tempY >= 0 && board->board[tempY * 8 + tempX] == 'x'){
     p_moves.push_back(tempY * 8 + tempX);
     tempX--;
@@ -119,8 +121,8 @@ void MoveCalculator::upper_left_to_lower_right(int f_ind, char f_piece, std::vec
     p_moves.push_back(tempY * 8 + tempX);
   }
 
-  tempX = coords.first;
-  tempY = coords.second;
+  tempX = coords.first + 1;
+  tempY = coords.second + 1;
 
   while(tempX < 8 && tempY < 8 && board->board[tempY * 8 + tempX] == 'x'){
     p_moves.push_back(tempY * 8 + tempX);
@@ -158,8 +160,8 @@ void MoveCalculator::up_to_down(int f_ind, char f_piece, std::vector<int> &p_mov
 void MoveCalculator::lower_left_to_upper_right(int f_ind, char f_piece, std::vector<int> &p_moves){
   //BISHOP and QUEEN
   std::pair<int, int> coords = board->get_2D_ind_from_ind(f_ind);
-  int tempX = coords.first;
-  int tempY = coords.second;
+  int tempX = coords.first - 1;
+  int tempY = coords.second + 1;
 
   while(tempX >= 0 && tempY < 8 && board->board[tempY * 8 + tempX] == 'x'){
     p_moves.push_back(tempY * 8 + tempX);
@@ -170,8 +172,8 @@ void MoveCalculator::lower_left_to_upper_right(int f_ind, char f_piece, std::vec
     p_moves.push_back(tempY * 8 + tempX);
   }
 
-  tempX = coords.first;
-  tempY = coords.second;
+  tempX = coords.first + 1;
+  tempY = coords.second - 1;
 
   while(tempX < 8 && tempY >= 0 && board->board[tempY * 8 + tempX] == 'x'){
     p_moves.push_back(tempY * 8 + tempX);
