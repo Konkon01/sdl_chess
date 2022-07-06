@@ -70,6 +70,7 @@ void MoveCalculator::calculate_pawn(int f_ind, char f_piece, std::vector<int> &p
 }
 void MoveCalculator::calculate_rook(int f_ind, char f_piece, std::vector<int> &p_moves){
   left_to_right(f_ind, f_piece, p_moves);
+  up_to_down(f_ind, f_piece, p_moves);
 }
 void MoveCalculator::calculate_horse(int f_ind, char f_piece, std::vector<int> &p_moves){}
 void MoveCalculator::calculate_bishop(int f_ind, char f_piece, std::vector<int> &p_moves){}
@@ -82,7 +83,6 @@ bool MoveCalculator::is_same_team(char p1, char p2){
 
 void MoveCalculator::left_to_right(int f_ind, char f_piece, std::vector<int> &p_moves){
   //ROOK and QUEEN
-  std::cout << "-----------------" << std::endl;
   std::pair<int, int> coords = board->get_2D_ind_from_ind(f_ind);
 
   int tempX = coords.first - 1;
@@ -109,6 +109,27 @@ void MoveCalculator::upper_left_to_lower_right(int f_ind, char f_piece, std::vec
 }
 void MoveCalculator::up_to_down(int f_ind, char f_piece, std::vector<int> &p_moves){
   //ROOK and QUEEN
+  std::pair<int, int> coords = board->get_2D_ind_from_ind(f_ind);
+
+  int tempY = coords.second - 1;
+  while(tempY >= 0 && board->board[tempY * 8 + coords.first] == 'x'){
+    p_moves.push_back(tempY * 8 + coords.first);
+    tempY--;
+  }
+  if(tempY != -1 && !is_same_team(board->board[tempY * 8 + coords.first], f_piece)){
+    p_moves.push_back(tempY * 8 + coords.first);
+  }
+
+
+  tempY = coords.second + 1;
+  while(tempY < 8 && board->board[tempY * 8 + coords.first] == 'x'){
+    p_moves.push_back(tempY * 8 + coords.first);
+    tempY++;
+  }
+  if(tempY != 8 && !is_same_team(board->board[tempY * 8 + coords.first], f_piece)){
+    p_moves.push_back(tempY * 8 + coords.first);
+  }
+
 }
 void MoveCalculator::lower_left_to_upper_right(int f_ind, char f_piece, std::vector<int> &p_moves){
   //BISHOP and QUEEN
