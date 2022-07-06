@@ -77,7 +77,12 @@ void MoveCalculator::calculate_bishop(int f_ind, char f_piece, std::vector<int> 
   upper_left_to_lower_right(f_ind, f_piece, p_moves);
   lower_left_to_upper_right(f_ind, f_piece, p_moves);
 }
-void MoveCalculator::calculate_queen(int f_ind, char f_piece, std::vector<int> &p_moves){}
+void MoveCalculator::calculate_queen(int f_ind, char f_piece, std::vector<int> &p_moves){
+  left_to_right(f_ind, f_piece, p_moves);
+  upper_left_to_lower_right(f_ind, f_piece, p_moves);
+  up_to_down(f_ind, f_piece, p_moves);
+  lower_left_to_upper_right(f_ind, f_piece, p_moves);
+}
 void MoveCalculator::calculate_king(int f_ind, char f_piece, std::vector<int> &p_moves){}
   
 bool MoveCalculator::is_same_team(char p1, char p2){
