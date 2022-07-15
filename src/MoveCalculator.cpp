@@ -72,17 +72,46 @@ void MoveCalculator::calculate_rook(int f_ind, char f_piece, std::vector<int> &p
   left_to_right(f_ind, f_piece, p_moves);
   up_to_down(f_ind, f_piece, p_moves);
 }
-void MoveCalculator::calculate_horse(int f_ind, char f_piece, std::vector<int> &p_moves){}
+
+void MoveCalculator::calculate_horse(int f_ind, char f_piece, std::vector<int> &p_moves){
+  if(f_ind - 17 >= 0 && ((board->board[f_ind - 17] == 'x') || !is_same_team(f_piece, board->board[ f_ind-17 ]))){
+    p_moves.push_back(f_ind - 17);
+  }
+  if(f_ind - 15 >= 0 && ((board->board[f_ind - 15] == 'x') || !is_same_team(f_piece, board->board[ f_ind-15 ]))){
+    p_moves.push_back(f_ind - 15);
+  }
+  if(f_ind - 10 >= 0 && ((board->board[f_ind - 10] == 'x') || !is_same_team(f_piece, board->board[ f_ind-10 ]))){
+    p_moves.push_back(f_ind - 10);
+  }
+  if(f_ind - 6 >= 0 && ((board->board[f_ind - 6] == 'x') || !is_same_team(f_piece, board->board[ f_ind-6 ]))){
+    p_moves.push_back(f_ind - 6);
+  }
+  if(f_ind + 6 < 64 && ((board->board[f_ind + 6] == 'x') || !is_same_team(f_piece, board->board[ f_ind+6 ]))){
+    p_moves.push_back(f_ind + 6);
+  }
+  if(f_ind + 10 < 64 && ((board->board[f_ind + 10] == 'x') || !is_same_team(f_piece, board->board[ f_ind+10 ]))){
+    p_moves.push_back(f_ind + 10);
+  }
+  if(f_ind + 15 < 64 && ((board->board[f_ind + 15] == 'x') || !is_same_team(f_piece, board->board[ f_ind+15 ]))){
+    p_moves.push_back(f_ind + 15);
+  }
+  if(f_ind + 17 < 64 && ((board->board[f_ind + 17] == 'x') || !is_same_team(f_piece, board->board[ f_ind+17 ]))){
+    p_moves.push_back(f_ind + 17);
+  }
+}
+
 void MoveCalculator::calculate_bishop(int f_ind, char f_piece, std::vector<int> &p_moves){
   upper_left_to_lower_right(f_ind, f_piece, p_moves);
   lower_left_to_upper_right(f_ind, f_piece, p_moves);
 }
+
 void MoveCalculator::calculate_queen(int f_ind, char f_piece, std::vector<int> &p_moves){
   left_to_right(f_ind, f_piece, p_moves);
   upper_left_to_lower_right(f_ind, f_piece, p_moves);
   up_to_down(f_ind, f_piece, p_moves);
   lower_left_to_upper_right(f_ind, f_piece, p_moves);
 }
+
 void MoveCalculator::calculate_king(int f_ind, char f_piece, std::vector<int> &p_moves){}
   
 bool MoveCalculator::is_same_team(char p1, char p2){
