@@ -33,7 +33,7 @@ void MoveCalculator::calculate_pawn(int f_ind, char f_piece, std::vector<int> &p
       p_moves.push_back(f_ind - 8);
     }
     
-    if(coords.second == 6){ //First move of pawn
+    if(coords.second == 6 && board->board[f_ind - 16] == 'x'){ //First move of pawn
       p_moves.push_back(f_ind - 16);
     }
 
@@ -52,7 +52,7 @@ void MoveCalculator::calculate_pawn(int f_ind, char f_piece, std::vector<int> &p
       p_moves.push_back(f_ind + 8);
     }
     
-    if(coords.second == 1){ //First move of pawn
+    if(coords.second == 1 && board->board[f_ind + 16] == 'x'){ //First move of pawn
       p_moves.push_back(f_ind + 16);
     }
 
