@@ -7,7 +7,7 @@ Tasks ahead:
   - Rook movement calculation :heavy_check_mark:
   - Bishop movement calculation :heavy_check_mark:
   - Queen movement calculation :heavy_check_mark:
-  - Horse movement calculation
+  - Horse movement calculation :heavy_check_mark:
   - Does the non king piece's move expose the King?
   - King movement calculation
   - Was there check given?
