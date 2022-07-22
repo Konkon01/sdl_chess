@@ -1,5 +1,6 @@
 #include "../headers/MoveCalculator.h"
 #include <iostream>
+#include <set>
 
 MoveCalculator::MoveCalculator(Board *b)
 {
@@ -144,18 +145,62 @@ void MoveCalculator::calculate_queen(int f_ind, char f_piece, std::set<int> &p_m
 
 void MoveCalculator::calculate_king(int f_ind, char f_piece, std::set<int> &p_moves)
 {
+  std::set<int> opp_moves; 
   for (int i = 0; i < 64; i++)
   {
-    if (board->board[i] != 'x' && !is_same_team(board->board[i], f_piece))
+    char current_p = board->board[i];
+    if (current_p != 'x' && current_p != 'k' && current_p != 'K' && !is_same_team(board->board[i], f_piece))
     {
-      calculate_moves(i, f_piece, p_moves);
+      calculate_moves(i, board->board[i], opp_moves);
     }
+  }
+  
+  if((board->board[f_ind - 9] == 'x' && !in_opp_moves(f_ind - 9, opp_moves)) ||
+      (board->board[f_ind - 9] != 'x' && !is_same_team(f_piece, board->board[f_ind - 9]))){
+    p_moves.insert(f_ind - 9);
+  }
+  if((board->board[f_ind - 8] == 'x' && !in_opp_moves(f_ind - 8, opp_moves)) ||
+      (board->board[f_ind - 8] != 'x' && !is_same_team(f_piece, board->board[f_ind - 8]))){
+    p_moves.insert(f_ind - 8);
+  }
+  if((board->board[f_ind - 7] == 'x' && !in_opp_moves(f_ind - 7, opp_moves)) ||
+      (board->board[f_ind - 7] != 'x' && !is_same_team(f_piece, board->board[f_ind - 7]))){
+    p_moves.insert(f_ind - 7);
+  }
+  if((board->board[f_ind - 1] == 'x' && !in_opp_moves(f_ind - 1, opp_moves)) ||
+      (board->board[f_ind - 1] != 'x' && !is_same_team(f_piece, board->board[f_ind - 1]))){
+    p_moves.insert(f_ind - 1);
+  }
+  if((board->board[f_ind + 1] == 'x' && !in_opp_moves(f_ind + 1, opp_moves)) ||
+      (board->board[f_ind + 1] != 'x' && !is_same_team(f_piece, board->board[f_ind + 1]))){
+    p_moves.insert(f_ind + 1);
+  }
+  if((board->board[f_ind + 7] == 'x' && !in_opp_moves(f_ind + 7, opp_moves)) ||
+      (board->board[f_ind + 7] != 'x' && !is_same_team(f_piece, board->board[f_ind + 7]))){
+    p_moves.insert(f_ind + 7);
+  }
+  if((board->board[f_ind + 8] == 'x' && !in_opp_moves(f_ind + 8, opp_moves)) ||
+      (board->board[f_ind + 8] != 'x' && !is_same_team(f_piece, board->board[f_ind + 8]))){
+    p_moves.insert(f_ind + 8);
+  }
+  if((board->board[f_ind + 9] == 'x' && !in_opp_moves(f_ind + 9, opp_moves)) ||
+    (board->board[f_ind + 9] != 'x' && !is_same_team(f_piece, board->board[f_ind + 9]))){
+    p_moves.insert(f_ind + 9);
   }
 }
 
 bool MoveCalculator::is_same_team(char p1, char p2)
 {
   return (p1 < 91 && p2 < 91) || (p1 > 91 && p2 > 91);
+}
+
+bool MoveCalculator::in_opp_moves(int ind, std::set<int> &opp_moves){
+  for(int i : opp_moves){
+    if(i == ind){
+      return true;
+    }
+  }
+  return false;
 }
 
 void MoveCalculator::left_to_right(int f_ind, char f_piece, std::set<int> &p_moves)
