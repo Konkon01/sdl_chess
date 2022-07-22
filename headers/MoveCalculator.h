@@ -15,6 +15,7 @@ class MoveCalculator
   void calculate_king(int f_ind, char f_piece, std::set<int> &p_moves);
 
   bool is_same_team(char p1, char p2);
+  bool in_opp_moves(int ind, std::set<int> &opp_moves);
 
   void left_to_right(int f_ind, char f_piece, std::set<int> &p_moves);
   void upper_left_to_lower_right(int f_ind, char f_piece, std::set<int> &p_moves);
