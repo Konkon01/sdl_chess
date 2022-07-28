@@ -5,8 +5,7 @@
 #include <SDL2/SDL.h>
 #include <set>
 
-class EventHandler
-{
+class EventHandler{
 private:
   SDL_Event event;
   Board *board;

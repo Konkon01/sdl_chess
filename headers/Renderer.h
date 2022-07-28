@@ -7,8 +7,7 @@
 #include <set>
 #include <vector>
 
-class Renderer
-{
+class Renderer{
   SDL_Renderer *rend;
   Board *board;
   std::vector<Piece *> pieces;

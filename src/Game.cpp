@@ -8,8 +8,7 @@
 #include <iostream>
 #include <set>
 
-Game::Game()
-{
+Game::Game(){
   SDL_Init(SDL_INIT_EVERYTHING);
   window = SDL_CreateWindow("Chess Game",
                             SDL_WINDOWPOS_CENTERED,
@@ -22,8 +21,7 @@ Game::Game()
   renderer = new Renderer(window, board);
 }
 
-void Game::clean_up()
-{
+void Game::clean_up(){
   delete board;
   delete event_handler;
   delete renderer;
@@ -31,8 +29,7 @@ void Game::clean_up()
   SDL_Quit();
 }
 
-void Game::start_game()
-{
+void Game::start_game(){
 
   std::set<int> possible_moves;
   renderer->render_board(possible_moves);
