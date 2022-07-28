@@ -9,6 +9,6 @@ Tasks ahead:
   - Queen movement calculation :heavy_check_mark:
   - Horse movement calculation :heavy_check_mark:
   - Does the non king piece's move expose the King?
-  - King movement calculation
+  - King movement calculation :heavy_check_mark:
   - Was there check given?
     - Was it checkmate?
