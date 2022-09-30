@@ -2,6 +2,7 @@
 #define EVENTHANDLER_H
 #include "Board.h"
 #include "MoveCalculator.h"
+#include "Check.h"
 #include <SDL2/SDL.h>
 #include <set>
 
@@ -10,6 +11,7 @@ private:
   SDL_Event event;
   Board *board;
   MoveCalculator *move_calc;
+  Check *check;
   bool is_light_turn;
   char selected_piece;
   int selected_ind;

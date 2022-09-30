@@ -1,14 +1,17 @@
 #include "../headers/EventHandler.h"
 #include "../headers/Board.h"
 #include "../headers/MoveCalculator.h"
+#include "../headers/Check.h"
 
 #include <SDL2/SDL.h>
 #include <utility>
 #include <iostream>
+#include <vector>
 
 EventHandler::EventHandler(Board *b){
   board = b;
   move_calc = new MoveCalculator(b);
+  check = new Check();
   is_light_turn = true;
   selected_piece = 'x';
   selected_ind = -1;
@@ -68,13 +71,16 @@ void EventHandler::handle_events(std::set<int> &possible_moves, bool &running){
 
         if (is_possible(possible_moves, field_ind)){ // Valid move
           board->move_piece(selected_ind, field_ind);
+          if(selected_piece == 'k' || selected_piece == 'K'){
+            check->update_king_pos(selected_piece, selected_ind);
+          }
           change_turn();
         }
 
         reset(selected_ind, selected_piece, possible_moves);
         break;
-      }
-      else{
+
+      }else{
         /*TASKS
           -select piece
           -calculate possible moves
