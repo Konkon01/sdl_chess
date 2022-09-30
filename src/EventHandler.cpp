@@ -18,6 +18,7 @@ EventHandler::EventHandler(Board *b){
 }
 EventHandler::~EventHandler(){
   delete move_calc;
+  delete check;
 }
 
 void EventHandler::reset(int &s_ind, char &s_piece, std::set<int> &possible_moves){
